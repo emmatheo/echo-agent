@@ -56,24 +56,35 @@ import {
  *   { 'POST /api/analyze': { accepts: [{ network, asset, amount }] } }
  * `amount` is in USDC's smallest unit (6 decimals): 0.02 USDC = "20000".
  * ------------------------------------------------------------------ */
-const injectiveMiddleware = injectivePaymentMiddleware(
-  {
-    [PROTECTED_ROUTE]: {
-      accepts: [
-        {
-          network: X402_NETWORK, // "eip155:1776"
-          asset: INJECTIVE_EVM.usdcAddress, // native USDC on Injective EVM
-          amount: PREMIUM_PRICE_ATOMIC, // "20000"
-          // Some library versions accept a payTo / description here; the
-          // middleware falls back to its own defaults if unsupported.
-          payTo: PAY_TO_ADDRESS,
-          description: "Echo Agent — detailed premium football analysis",
-        } as Record<string, unknown>,
-      ],
-    },
-  },
-  { facilitatorUrl: X402_FACILITATOR_URL },
-);
+// Build the middleware lazily. Running the factory at module top level would
+// execute it at import time (e.g. during `next build` page-data collection),
+// which can throw before any request is served. Deferring to first use keeps
+// the module safe to import.
+let _injectiveMiddleware: ReturnType<typeof injectivePaymentMiddleware> | null =
+  null;
+function getInjectiveMiddleware() {
+  if (!_injectiveMiddleware) {
+    _injectiveMiddleware = injectivePaymentMiddleware(
+      {
+        [PROTECTED_ROUTE]: {
+          accepts: [
+            {
+              network: X402_NETWORK, // "eip155:1776"
+              asset: INJECTIVE_EVM.usdcAddress, // native USDC on Injective EVM
+              amount: PREMIUM_PRICE_ATOMIC, // "20000"
+              // Some library versions accept a payTo / description here; the
+              // middleware falls back to its own defaults if unsupported.
+              payTo: PAY_TO_ADDRESS,
+              description: "Echo Agent — detailed premium football analysis",
+            } as Record<string, unknown>,
+          ],
+        },
+      },
+      { facilitatorUrl: X402_FACILITATOR_URL },
+    );
+  }
+  return _injectiveMiddleware;
+}
 
 /* ------------------------------------------------------------------ *
  * Minimal Express req/res shims.
@@ -194,7 +205,7 @@ export async function runInjectiveX402(
 
   // --- Run the official middleware --------------------------------
   await Promise.resolve(
-    (injectiveMiddleware as unknown as (
+    (getInjectiveMiddleware() as unknown as (
       req: unknown,
       res: unknown,
       next: NextFn,
