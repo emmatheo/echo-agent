@@ -101,11 +101,11 @@ export async function POST(request: NextRequest) {
   const tier: Tier = body.tier === "premium" ? "premium" : "free";
 
   // Fail fast with a clear message if the model key is missing.
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.LLM_API_KEY && !process.env.GEMINI_API_KEY) {
     return err(500, {
       ok: false,
       code: "server_error",
-      error: "Server is missing ANTHROPIC_API_KEY.",
+      error: "Server is missing LLM_API_KEY (or GEMINI_API_KEY).",
     });
   }
 
