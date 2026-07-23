@@ -18,9 +18,12 @@ import {
 import { ShimmerButton } from "../components/magicui/shimmer-button";
 import {
   connectWallet,
+  disconnectWallet,
+  ensureWalletChain,
   INJECTIVE_EVM_CLIENT,
   makePaidFetch,
   shortAddress,
+  watchWallet,
   type ConnectedWallet,
 } from "../lib/x402-client";
 
@@ -99,6 +102,11 @@ export default function Page() {
     chatRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  // Follow account switches / disconnects made inside the wallet itself.
+  React.useEffect(() => {
+    return watchWallet((w) => setWallet(w));
+  }, []);
+
   async function handleConnect() {
     try {
       const w = await connectWallet();
@@ -106,8 +114,16 @@ export default function Page() {
       fireBurst(0.9, 0.12);
       setNotice(null);
     } catch (e) {
-      setNotice((e as Error).message);
+      const code = (e as { code?: number }).code;
+      setNotice(
+        code === 4001 ? "Wallet connection cancelled." : (e as Error).message,
+      );
     }
+  }
+
+  async function handleDisconnect() {
+    setWallet(null);
+    await disconnectWallet();
   }
 
   async function send(text?: string) {
@@ -125,6 +141,10 @@ export default function Page() {
     setBusy(true);
 
     try {
+      // Make sure the wallet is still on the configured Injective chain at
+      // payment time — the user may have switched networks since connecting.
+      if (tier === "premium" && wallet) await ensureWalletChain();
+
       const doFetch =
         tier === "premium" && wallet
           ? makePaidFetch(wallet.walletClient)
@@ -200,6 +220,13 @@ export default function Page() {
             <span className="inline-flex items-center gap-2 rounded-md border border-line bg-carbon px-3 py-2 font-mono text-xs text-goldbright">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" />
               {shortAddress(wallet.address)}
+              <button
+                onClick={handleDisconnect}
+                title="Disconnect wallet"
+                className="ml-1 rounded border border-line px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-muted transition-colors hover:border-gold/50 hover:text-bone"
+              >
+                Disconnect
+              </button>
             </span>
           ) : (
             <ShimmerButton

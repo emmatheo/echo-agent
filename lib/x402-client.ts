@@ -49,6 +49,11 @@ const injectiveChain = {
 
 type Eip1193 = {
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
+  on?: (event: string, handler: (payload: unknown) => void) => void;
+  removeListener?: (
+    event: string,
+    handler: (payload: unknown) => void,
+  ) => void;
 };
 
 function getProvider(): Eip1193 {
@@ -99,8 +104,31 @@ export interface ConnectedWallet {
   walletClient: WalletClient;
 }
 
+function buildWallet(provider: Eip1193, address: string): ConnectedWallet {
+  const walletClient = createWalletClient({
+    account: address as `0x${string}`,
+    chain: injectiveChain,
+    transport: custom(provider as never),
+  });
+  return { address: address as `0x${string}`, walletClient };
+}
+
 export async function connectWallet(): Promise<ConnectedWallet> {
   const provider = getProvider();
+
+  // Ask for the account picker first so a returning user can choose a
+  // different account. Not all wallets implement wallet_requestPermissions;
+  // fall through silently and let eth_requestAccounts handle it.
+  try {
+    await provider.request({
+      method: "wallet_requestPermissions",
+      params: [{ eth_accounts: {} }],
+    });
+  } catch (err) {
+    // 4001 = user rejected the picker; treat that as cancelling the connect.
+    if ((err as { code?: number }).code === 4001) throw err;
+  }
+
   const accounts = (await provider.request({
     method: "eth_requestAccounts",
   })) as string[];
@@ -108,13 +136,55 @@ export async function connectWallet(): Promise<ConnectedWallet> {
 
   await ensureInjectiveChain(provider);
 
-  const walletClient = createWalletClient({
-    account: accounts[0] as `0x${string}`,
-    chain: injectiveChain,
-    transport: custom(provider as never),
-  });
+  return buildWallet(provider, accounts[0]);
+}
 
-  return { address: accounts[0] as `0x${string}`, walletClient };
+/**
+ * Forget the connection app-side and ask the wallet to revoke the site's
+ * account permission (supported by MetaMask; best-effort elsewhere), so the
+ * next connect shows the account picker again.
+ */
+export async function disconnectWallet(): Promise<void> {
+  try {
+    await getProvider().request({
+      method: "wallet_revokePermissions",
+      params: [{ eth_accounts: {} }],
+    });
+  } catch {
+    // Wallet doesn't support revocation — app-side forget is all we can do.
+  }
+}
+
+/**
+ * Re-assert the configured Injective chain (used right before payment, in
+ * case the user switched networks after connecting).
+ */
+export async function ensureWalletChain(): Promise<void> {
+  await ensureInjectiveChain(getProvider());
+}
+
+/**
+ * Track wallet-side account changes (switching account, disconnecting from
+ * the wallet UI). Returns an unsubscribe function. `onChange` receives the
+ * new ConnectedWallet, or null when no account remains authorised.
+ */
+export function watchWallet(
+  onChange: (wallet: ConnectedWallet | null) => void,
+): () => void {
+  let provider: Eip1193;
+  try {
+    provider = getProvider();
+  } catch {
+    return () => {};
+  }
+  if (!provider.on) return () => {};
+
+  const handler = (payload: unknown) => {
+    const accounts = (payload as string[]) ?? [];
+    onChange(accounts.length ? buildWallet(provider, accounts[0]) : null);
+  };
+  provider.on("accountsChanged", handler);
+  return () => provider.removeListener?.("accountsChanged", handler);
 }
 
 /**
