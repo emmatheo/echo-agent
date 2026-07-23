@@ -33,7 +33,6 @@ import {
   INJECTIVE_EVM,
   PAY_TO_ADDRESS,
   PREMIUM_PRICE_USDC,
-  X402_FACILITATOR_URL,
   X402_NETWORK,
   buildPaymentInfo,
 } from "../../../lib/injective";
@@ -122,17 +121,10 @@ export async function POST(request: NextRequest) {
   }
 
   // --- 3. PREMIUM tier: enforce x402 payment first ----------------
-  // Fail fast with a clear message on server misconfiguration. Without
-  // these, the middleware can't produce a signable 402 quote, and the
-  // client-side payment wrapper silently never prompts the wallet.
-  if (!X402_FACILITATOR_URL) {
-    return err(500, {
-      ok: false,
-      code: "server_error",
-      error:
-        "Server is missing X402_FACILITATOR_URL (the Injective x402 facilitator for your network). Premium payments cannot be quoted.",
-    });
-  }
+  // Fail fast with a clear message on server misconfiguration. Without a
+  // real receiving address, settled payments would go to the zero address.
+  // (X402_FACILITATOR_URL is optional — the middleware has a built-in
+  // default facilitator when it isn't set.)
   if (/^0x0{40}$/i.test(PAY_TO_ADDRESS)) {
     return err(500, {
       ok: false,
