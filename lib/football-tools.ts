@@ -246,11 +246,18 @@ export type FootballToolName = (typeof FOOTBALL_TOOLS)[number]["name"];
 
 /** Dispatch a tool call by name. Never throws — returns an error object. */
 export function runFootballTool(name: string, input: unknown): unknown {
-  const args = (input ?? {}) as Record<string, never>;
+  const args = (input ?? {}) as Record<string, unknown>;
   try {
     switch (name) {
       case "search_matches":
-        return searchMatches(args);
+        return searchMatches(
+          args as {
+            team?: string;
+            stage?: string;
+            date?: string;
+            limit?: number;
+          },
+        );
       case "get_match":
         return getMatch(args as { matchId: string });
       case "get_player":
@@ -260,7 +267,9 @@ export function runFootballTool(name: string, input: unknown): unknown {
       case "compare_players":
         return comparePlayers(args as { playerA: string; playerB: string });
       case "what_if_context":
-        return whatIfContext(args);
+        return whatIfContext(
+          args as { matchId?: string; teams?: string[]; players?: string[] },
+        );
       default:
         return { error: `Unknown tool: ${name}` };
     }
