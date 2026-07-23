@@ -24,9 +24,19 @@ import { FOOTBALL_TOOLS, runFootballTool } from "./football-tools";
  * Config
  * ------------------------------------------------------------------ */
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY, // required
-});
+// Construct the client lazily. Building at module top level would run the
+// Anthropic constructor at import time (e.g. during `next build` page-data
+// collection), which throws when ANTHROPIC_API_KEY is absent at build time.
+// Deferring to first use keeps the module safe to import without the key.
+let _anthropic: Anthropic | null = null;
+function getAnthropic(): Anthropic {
+  if (!_anthropic) {
+    _anthropic = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY, // required
+    });
+  }
+  return _anthropic;
+}
 
 // Free tier: fast + cheap. Premium: strongest reasoning. Both overridable.
 const FREE_MODEL = process.env.FREE_MODEL ?? "claude-sonnet-5";
@@ -98,7 +108,7 @@ export async function runAgent(params: {
     // Once the tool budget is spent, stop offering tools so the model wraps up.
     const toolsExhausted = toolTrace.length >= maxTools;
 
-    const response = await anthropic.messages.create({
+    const response = await getAnthropic().messages.create({
       model,
       max_tokens: maxTokens,
       system,
