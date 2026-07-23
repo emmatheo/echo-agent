@@ -90,7 +90,10 @@ function getInjectiveMiddleware() {
           ],
         },
       },
-      { facilitatorUrl: X402_FACILITATOR_URL },
+      // facilitatorUrl is optional — the library ships a default Injective
+      // facilitator. Only override it when explicitly configured; passing
+      // an empty string would clobber the default with a broken value.
+      X402_FACILITATOR_URL ? { facilitatorUrl: X402_FACILITATOR_URL } : {},
     );
   }
   return _injectiveMiddleware;
