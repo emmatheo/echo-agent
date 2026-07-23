@@ -13,15 +13,31 @@
 import { createWalletClient, custom, type WalletClient } from "viem";
 import { wrapFetchWithPayment } from "x402-fetch";
 
+// NEXT_PUBLIC_* vars are inlined at build time, so the deploy environment
+// (e.g. Render) controls which chain the wallet flow targets. Defaults are
+// Injective EVM MAINNET (1776); set the vars for TESTNET (1439).
+const CHAIN_ID = Number(process.env.NEXT_PUBLIC_INJ_CHAIN_ID ?? 1776);
+
 export const INJECTIVE_EVM_CLIENT = {
-  chainIdDecimal: 1776,
-  chainIdHex: "0x6f0",
-  chainName: "Injective",
-  rpcUrls: ["https://sentry.evm-rpc.injective.network/"],
+  chainIdDecimal: CHAIN_ID,
+  chainIdHex: "0x" + CHAIN_ID.toString(16),
+  chainName:
+    process.env.NEXT_PUBLIC_INJ_CHAIN_NAME ??
+    (CHAIN_ID === 1776 ? "Injective" : "Injective Testnet"),
+  rpcUrls: [
+    process.env.NEXT_PUBLIC_INJ_RPC_URL ??
+      "https://sentry.evm-rpc.injective.network/",
+  ],
   nativeCurrency: { name: "Injective", symbol: "INJ", decimals: 18 },
-  blockExplorerUrls: ["https://blockscout.injective.network"],
-  usdcAddress: "0xa00C59fF5a080D2b954d0c75e46E22a0c371235a",
-  bridgeUrl: "https://bridge.injective.network",
+  blockExplorerUrls: [
+    process.env.NEXT_PUBLIC_INJ_EXPLORER_URL ??
+      "https://blockscout.injective.network",
+  ],
+  usdcAddress:
+    process.env.NEXT_PUBLIC_USDC_ADDRESS ??
+    "0xa00C59fF5a080D2b954d0c75e46E22a0c371235a",
+  bridgeUrl:
+    process.env.NEXT_PUBLIC_INJ_BRIDGE_URL ?? "https://bridge.injective.network",
 } as const;
 
 const injectiveChain = {
@@ -46,29 +62,35 @@ function getProvider(): Eip1193 {
 }
 
 async function ensureInjectiveChain(provider: Eip1193) {
-  try {
-    await provider.request({
+  const switchToChain = () =>
+    provider.request({
       method: "wallet_switchEthereumChain",
       params: [{ chainId: INJECTIVE_EVM_CLIENT.chainIdHex }],
     });
-  } catch (err) {
-    const code = (err as { code?: number }).code;
-    if (code === 4902) {
-      await provider.request({
-        method: "wallet_addEthereumChain",
-        params: [
-          {
-            chainId: INJECTIVE_EVM_CLIENT.chainIdHex,
-            chainName: INJECTIVE_EVM_CLIENT.chainName,
-            rpcUrls: INJECTIVE_EVM_CLIENT.rpcUrls,
-            nativeCurrency: INJECTIVE_EVM_CLIENT.nativeCurrency,
-            blockExplorerUrls: INJECTIVE_EVM_CLIENT.blockExplorerUrls,
-          },
-        ],
-      });
-    } else {
-      throw err;
-    }
+
+  try {
+    await switchToChain();
+  } catch (switchErr) {
+    // Wallets disagree on how they report "chain not added": MetaMask uses
+    // code 4902, others use different codes or only a message. If the user
+    // outright rejected the request, respect that; otherwise try adding the
+    // chain (which in most wallets also switches to it), then switch again.
+    const code = (switchErr as { code?: number }).code;
+    if (code === 4001) throw switchErr; // user rejected
+
+    await provider.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          chainId: INJECTIVE_EVM_CLIENT.chainIdHex,
+          chainName: INJECTIVE_EVM_CLIENT.chainName,
+          rpcUrls: INJECTIVE_EVM_CLIENT.rpcUrls,
+          nativeCurrency: INJECTIVE_EVM_CLIENT.nativeCurrency,
+          blockExplorerUrls: INJECTIVE_EVM_CLIENT.blockExplorerUrls,
+        },
+      ],
+    });
+    await switchToChain();
   }
 }
 
