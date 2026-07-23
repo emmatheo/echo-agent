@@ -46,9 +46,12 @@ function getApiKey(): string {
   return key;
 }
 
-// Free tier: fast + generous free quota. Premium: strongest reasoning.
-const FREE_MODEL = process.env.FREE_MODEL ?? "gemini-2.5-flash";
-const PREMIUM_MODEL = process.env.PREMIUM_MODEL ?? "gemini-2.5-pro";
+// "gemini-flash-latest" is Google's alias for the newest Flash model
+// (currently gemini-3.5-flash), so defaults survive model retirements.
+// Premium keeps the same free-quota model by default; override
+// PREMIUM_MODEL (e.g. gemini-pro-latest) if your key has quota for it.
+const FREE_MODEL = process.env.FREE_MODEL ?? "gemini-flash-latest";
+const PREMIUM_MODEL = process.env.PREMIUM_MODEL ?? "gemini-flash-latest";
 
 // Tool-use loop safety limits.
 const FREE_MAX_TOOLS = 2;
