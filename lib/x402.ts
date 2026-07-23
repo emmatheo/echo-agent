@@ -62,6 +62,14 @@ import {
 // the module safe to import.
 let _injectiveMiddleware: ReturnType<typeof injectivePaymentMiddleware> | null =
   null;
+
+// Element type of a route's `accepts` array, derived from the middleware's
+// own signature so it always matches the installed library version without
+// depending on the library exporting the type by name.
+type RoutePaymentOption = NonNullable<
+  Parameters<typeof injectivePaymentMiddleware>[0][string]["accepts"]
+>[number];
+
 function getInjectiveMiddleware() {
   if (!_injectiveMiddleware) {
     _injectiveMiddleware = injectivePaymentMiddleware(
@@ -76,7 +84,7 @@ function getInjectiveMiddleware() {
               // middleware falls back to its own defaults if unsupported.
               payTo: PAY_TO_ADDRESS,
               description: "Echo Agent — detailed premium football analysis",
-            } as Record<string, unknown>,
+            } as unknown as RoutePaymentOption,
           ],
         },
       },
