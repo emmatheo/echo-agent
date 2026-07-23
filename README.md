@@ -58,14 +58,14 @@ Shared brain:  football-tools.ts  ──►  also served over MCP by  mcp-server
 npm install
 
 # 2. configure
-cp .env.example .env.local        # then fill in ANTHROPIC_API_KEY, PAY_TO_ADDRESS,
+cp .env.example .env.local        # then fill in LLM_API_KEY, PAY_TO_ADDRESS,
                                   # and X402_FACILITATOR_URL
 
 # 3. run
 npm run dev                       # http://localhost:3000
 ```
 
-Required env: `ANTHROPIC_API_KEY`, `PAY_TO_ADDRESS`, `X402_FACILITATOR_URL`.
+Required env: `LLM_API_KEY` (free Gemini key from https://aistudio.google.com), `PAY_TO_ADDRESS`, `X402_FACILITATOR_URL`.
 Chain defaults to Injective EVM **mainnet** (chain ID 1776); override in
 `.env.local` for testnet (1439). See `.env.example`.
 
