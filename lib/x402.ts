@@ -75,6 +75,8 @@ function getInjectiveMiddleware() {
     _injectiveMiddleware = injectivePaymentMiddleware(
       {
         [PROTECTED_ROUTE]: {
+          // Required by the library's RoutePaymentConfig.
+          description: "Echo Agent — detailed premium football analysis",
           accepts: [
             {
               network: X402_NETWORK, // "eip155:1776"
