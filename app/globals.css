@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ink text-bone font-sans antialiased;
+    background-image:
+      radial-gradient(
+        1200px 600px at 78% -8%,
+        rgba(201, 162, 75, 0.1),
+        transparent 60%
+      ),
+      radial-gradient(
+        900px 500px at 10% 8%,
+        rgba(201, 162, 75, 0.05),
+        transparent 55%
+      );
+    background-attachment: fixed;
+  }
+
+  .font-display {
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  ::selection {
+    background: rgba(201, 162, 75, 0.28);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .rule-t {
+    border-top: 1px solid theme("colors.line");
+  }
+
+  .text-gold-grad {
+    background: linear-gradient(180deg, #f4dc9a 0%, #c9a24b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #2c2c32;
+  border-radius: 999px;
+  border: 2px solid #0b0b0d;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #3a3a42;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

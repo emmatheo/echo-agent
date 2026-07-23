@@ -1,0 +1,189 @@
+{
+  "_meta": {
+    "disclaimer": "ILLUSTRATIVE SAMPLE DATA for the Injective Global Cup hackathon. Stats and market values are fabricated for demo purposes. Structure is representative of a production scouting feed.",
+    "generatedFor": "Echo Agent",
+    "statsScope": "FIFA World Cup 2026 (per-tournament)"
+  },
+  "players": [
+    {
+      "id": "mbappe-fra",
+      "name": "Kylian Mbappe",
+      "country": "France",
+      "club": "Real Madrid",
+      "position": "FW",
+      "age": 27,
+      "foot": "right",
+      "marketValueEur": 180000000,
+      "worldCup2026": { "appearances": 7, "goals": 8, "assists": 2, "minutes": 630, "xg": 6.4, "xa": 1.9, "passAccuracy": 79, "dribblesPer90": 4.1, "rating": 8.6 },
+      "traits": ["elite acceleration", "runs in behind", "left-half-space cutbacks", "penalty specialist", "big-game scorer"]
+    },
+    {
+      "id": "bellingham-eng",
+      "name": "Jude Bellingham",
+      "country": "England",
+      "club": "Real Madrid",
+      "position": "MF",
+      "age": 22,
+      "foot": "right",
+      "marketValueEur": 200000000,
+      "worldCup2026": { "appearances": 5, "goals": 3, "assists": 2, "minutes": 450, "xg": 2.1, "xa": 1.8, "passAccuracy": 88, "dribblesPer90": 2.3, "tacklesPer90": 2.1, "rating": 8.2 },
+      "traits": ["late box arrivals", "ball progression", "press resistance", "two-way engine", "leadership"]
+    },
+    {
+      "id": "vinicius-bra",
+      "name": "Vinicius Junior",
+      "country": "Brazil",
+      "club": "Real Madrid",
+      "position": "FW",
+      "age": 25,
+      "foot": "right",
+      "marketValueEur": 170000000,
+      "worldCup2026": { "appearances": 6, "goals": 5, "assists": 4, "minutes": 520, "xg": 4.0, "xa": 3.1, "passAccuracy": 81, "dribblesPer90": 5.6, "rating": 8.4 },
+      "traits": ["1v1 dominance from the left", "carries at speed", "cutback creator", "draws fouls"]
+    },
+    {
+      "id": "lautaro-arg",
+      "name": "Lautaro Martinez",
+      "country": "Argentina",
+      "club": "Inter Milan",
+      "position": "FW",
+      "age": 28,
+      "foot": "right",
+      "marketValueEur": 110000000,
+      "worldCup2026": { "appearances": 7, "goals": 6, "assists": 1, "minutes": 610, "xg": 5.2, "xa": 0.9, "passAccuracy": 78, "dribblesPer90": 1.6, "rating": 8.1 },
+      "traits": ["clinical near-post finishing", "channel runs", "hold-up play", "pressing forward"]
+    },
+    {
+      "id": "julian-arg",
+      "name": "Julian Alvarez",
+      "country": "Argentina",
+      "club": "Atletico Madrid",
+      "position": "FW",
+      "age": 26,
+      "foot": "right",
+      "marketValueEur": 100000000,
+      "worldCup2026": { "appearances": 7, "goals": 4, "assists": 3, "minutes": 590, "xg": 3.3, "xa": 2.4, "passAccuracy": 84, "dribblesPer90": 2.2, "rating": 7.9 },
+      "traits": ["tireless movement", "second-striker link play", "transition runs", "high work rate"]
+    },
+    {
+      "id": "yamal-esp",
+      "name": "Lamine Yamal",
+      "country": "Spain",
+      "club": "FC Barcelona",
+      "position": "FW",
+      "age": 18,
+      "foot": "left",
+      "marketValueEur": 200000000,
+      "worldCup2026": { "appearances": 5, "goals": 2, "assists": 4, "minutes": 430, "xg": 1.7, "xa": 3.6, "passAccuracy": 86, "dribblesPer90": 4.8, "rating": 8.0 },
+      "traits": ["right-wing wizardry", "inswinging deliveries", "final-third creativity", "fearless"]
+    },
+    {
+      "id": "pedri-esp",
+      "name": "Pedri",
+      "country": "Spain",
+      "club": "FC Barcelona",
+      "position": "MF",
+      "age": 23,
+      "foot": "right",
+      "marketValueEur": 130000000,
+      "worldCup2026": { "appearances": 5, "goals": 1, "assists": 2, "minutes": 460, "xg": 0.9, "xa": 1.7, "passAccuracy": 94, "dribblesPer90": 2.0, "tacklesPer90": 1.6, "rating": 7.8 },
+      "traits": ["tempo control", "press resistance", "line-breaking passes", "positional intelligence"]
+    },
+    {
+      "id": "musiala-ger",
+      "name": "Jamal Musiala",
+      "country": "Germany",
+      "club": "Bayern Munich",
+      "position": "MF",
+      "age": 23,
+      "foot": "right",
+      "marketValueEur": 150000000,
+      "worldCup2026": { "appearances": 4, "goals": 3, "assists": 1, "minutes": 360, "xg": 2.0, "xa": 1.2, "passAccuracy": 87, "dribblesPer90": 5.1, "rating": 7.9 },
+      "traits": ["close-control dribbling", "half-space carries", "chaos creator in tight areas"]
+    },
+    {
+      "id": "pulisic-usa",
+      "name": "Christian Pulisic",
+      "country": "United States",
+      "club": "AC Milan",
+      "position": "FW",
+      "age": 27,
+      "foot": "right",
+      "marketValueEur": 65000000,
+      "worldCup2026": { "appearances": 4, "goals": 3, "assists": 2, "minutes": 360, "xg": 1.9, "xa": 1.5, "passAccuracy": 82, "dribblesPer90": 3.2, "rating": 7.6 },
+      "traits": ["direct running", "left-foot curlers", "carries in transition", "talisman for the hosts"]
+    },
+    {
+      "id": "kane-eng",
+      "name": "Harry Kane",
+      "country": "England",
+      "club": "Bayern Munich",
+      "position": "FW",
+      "age": 32,
+      "foot": "right",
+      "marketValueEur": 80000000,
+      "worldCup2026": { "appearances": 5, "goals": 5, "assists": 2, "minutes": 450, "xg": 4.4, "xa": 1.6, "passAccuracy": 83, "dribblesPer90": 0.9, "rating": 7.8 },
+      "traits": ["complete striker", "deep-lying link play", "penalties", "long-range passing"]
+    },
+    {
+      "id": "dembele-fra",
+      "name": "Ousmane Dembele",
+      "country": "France",
+      "club": "Paris Saint-Germain",
+      "position": "FW",
+      "age": 28,
+      "foot": "both",
+      "marketValueEur": 90000000,
+      "worldCup2026": { "appearances": 7, "goals": 4, "assists": 5, "minutes": 600, "xg": 3.0, "xa": 4.2, "passAccuracy": 83, "dribblesPer90": 4.4, "rating": 8.0 },
+      "traits": ["two-footed unpredictability", "right-wing width", "cutbacks", "high top speed"]
+    },
+    {
+      "id": "gakpo-ned",
+      "name": "Cody Gakpo",
+      "country": "Netherlands",
+      "club": "Liverpool",
+      "position": "FW",
+      "age": 26,
+      "foot": "right",
+      "marketValueEur": 70000000,
+      "worldCup2026": { "appearances": 4, "goals": 4, "assists": 1, "minutes": 350, "xg": 2.8, "xa": 0.9, "passAccuracy": 80, "dribblesPer90": 2.6, "rating": 7.7 },
+      "traits": ["arriving at the near post", "left-side inside forward", "powerful drives", "aerial threat"]
+    },
+    {
+      "id": "rodrygo-bra",
+      "name": "Rodrygo",
+      "country": "Brazil",
+      "club": "Real Madrid",
+      "position": "FW",
+      "age": 25,
+      "foot": "right",
+      "marketValueEur": 100000000,
+      "worldCup2026": { "appearances": 6, "goals": 3, "assists": 3, "minutes": 500, "xg": 2.4, "xa": 2.6, "passAccuracy": 85, "dribblesPer90": 3.0, "rating": 7.7 },
+      "traits": ["combination play", "big-moment finishing", "flexible front-three role", "composure"]
+    },
+    {
+      "id": "endrick-bra",
+      "name": "Endrick",
+      "country": "Brazil",
+      "club": "Real Madrid",
+      "position": "FW",
+      "age": 19,
+      "foot": "right",
+      "marketValueEur": 60000000,
+      "worldCup2026": { "appearances": 5, "goals": 3, "assists": 0, "minutes": 210, "xg": 2.2, "xa": 0.4, "passAccuracy": 76, "dribblesPer90": 2.1, "rating": 7.4 },
+      "traits": ["impact substitute", "penalty-box instincts", "quick feet in the box", "raw upside"]
+    },
+    {
+      "id": "bruno-por",
+      "name": "Bruno Fernandes",
+      "country": "Portugal",
+      "club": "Manchester United",
+      "position": "MF",
+      "age": 31,
+      "foot": "right",
+      "marketValueEur": 55000000,
+      "worldCup2026": { "appearances": 4, "goals": 2, "assists": 3, "minutes": 360, "xg": 1.5, "xa": 2.9, "passAccuracy": 84, "dribblesPer90": 1.3, "tacklesPer90": 1.8, "rating": 7.6 },
+      "traits": ["set-piece delivery", "through-ball vision", "shooting from distance", "relentless intensity"]
+    }
+  ]
+}
