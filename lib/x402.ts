@@ -44,6 +44,7 @@ import {
   PAY_TO_ADDRESS,
   PREMIUM_PRICE_ATOMIC,
   PROTECTED_ROUTE,
+  X402_FACILITATOR_PRIVATE_KEY,
   X402_FACILITATOR_URL,
   X402_NETWORK,
   buildPaymentInfo,
@@ -70,6 +71,30 @@ type RoutePaymentOption = NonNullable<
   Parameters<typeof injectivePaymentMiddleware>[0][string]["accepts"]
 >[number];
 
+type MiddlewareOptions = Parameters<typeof injectivePaymentMiddleware>[1];
+
+/**
+ * The middleware requires exactly one of:
+ *  - facilitatorUrl: a remote facilitator service, or
+ *  - facilitator:    inline settlement in this process, signing with the
+ *                    X402_FACILITATOR_PRIVATE_KEY wallet (needs INJ for gas).
+ */
+function facilitatorOptions(): MiddlewareOptions {
+  if (X402_FACILITATOR_URL) {
+    return { facilitatorUrl: X402_FACILITATOR_URL };
+  }
+  if (X402_FACILITATOR_PRIVATE_KEY) {
+    return {
+      facilitator: {
+        privateKey: X402_FACILITATOR_PRIVATE_KEY as `0x${string}`,
+      } as NonNullable<MiddlewareOptions["facilitator"]>,
+    };
+  }
+  throw new Error(
+    "Set X402_FACILITATOR_PRIVATE_KEY (inline settlement) or X402_FACILITATOR_URL (remote facilitator) to enable premium payments.",
+  );
+}
+
 function getInjectiveMiddleware() {
   if (!_injectiveMiddleware) {
     _injectiveMiddleware = injectivePaymentMiddleware(
@@ -90,10 +115,7 @@ function getInjectiveMiddleware() {
           ],
         },
       },
-      // facilitatorUrl is optional — the library ships a default Injective
-      // facilitator. Only override it when explicitly configured; passing
-      // an empty string would clobber the default with a broken value.
-      X402_FACILITATOR_URL ? { facilitatorUrl: X402_FACILITATOR_URL } : {},
+      facilitatorOptions(),
     );
   }
   return _injectiveMiddleware;
