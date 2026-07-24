@@ -66,6 +66,15 @@ export const PAY_TO_ADDRESS =
  */
 export const X402_FACILITATOR_URL = process.env.X402_FACILITATOR_URL ?? "";
 
+/**
+ * Private key for the INLINE facilitator mode of @injectivelabs/x402:
+ * the server verifies and settles payments itself, signing settlement
+ * transactions with this wallet (it needs a little INJ for gas on the
+ * configured network). Used when no X402_FACILITATOR_URL is set.
+ */
+export const X402_FACILITATOR_PRIVATE_KEY =
+  process.env.X402_FACILITATOR_PRIVATE_KEY ?? "";
+
 /** The x402-gated route (method + path) this server protects. */
 export const PROTECTED_ROUTE = "POST /api/analyze";
 

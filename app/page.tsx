@@ -156,7 +156,10 @@ export default function Page() {
         body: JSON.stringify({ query, tier }),
       });
 
-      const receipt = res.headers.get("x-payment-response") ?? undefined;
+      const receipt =
+        res.headers.get("payment-response") ??
+        res.headers.get("x-payment-response") ??
+        undefined;
       const data = await res.json();
 
       if (!res.ok || data.ok === false) {
@@ -473,7 +476,9 @@ export default function Page() {
           <span>
             Echo Agent · built for the Injective Global Cup · MCP + x402 + USDC
           </span>
-          <span className="font-mono">Injective EVM · chain 1776</span>
+          <span className="font-mono">
+            Injective EVM · chain {INJECTIVE_EVM_CLIENT.chainIdDecimal}
+          </span>
         </div>
       </footer>
     </main>

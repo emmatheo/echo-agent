@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "disclaimer": "ILLUSTRATIVE SAMPLE DATA for the Injective Global Cup hackathon. Stats and market values are fabricated for demo purposes. Structure is representative of a production scouting feed.",
+    "disclaimer": "Goal totals for the Golden Boot race reflect the real 2026 World Cup outcomes (Mbappe 10, Messi 8, Haaland 7, Bellingham 7). Other per-tournament stats and market values are editorial estimates for demo purposes.",
     "generatedFor": "Echo Agent",
     "statsScope": "FIFA World Cup 2026 (per-tournament)"
   },
@@ -14,8 +14,32 @@
       "age": 27,
       "foot": "right",
       "marketValueEur": 180000000,
-      "worldCup2026": { "appearances": 7, "goals": 8, "assists": 2, "minutes": 630, "xg": 6.4, "xa": 1.9, "passAccuracy": 79, "dribblesPer90": 4.1, "rating": 8.6 },
-      "traits": ["elite acceleration", "runs in behind", "left-half-space cutbacks", "penalty specialist", "big-game scorer"]
+      "worldCup2026": { "appearances": 8, "goals": 10, "assists": 3, "minutes": 720, "xg": 8.1, "xa": 2.4, "passAccuracy": 80, "dribblesPer90": 4.2, "rating": 8.9 },
+      "traits": ["Golden Boot winner (10 goals) - first man to win it twice", "all-time World Cup top scorer (22 career goals)", "elite acceleration", "runs in behind", "big-game scorer"]
+    },
+    {
+      "id": "messi-arg",
+      "name": "Lionel Messi",
+      "country": "Argentina",
+      "club": "Inter Miami",
+      "position": "FW",
+      "age": 39,
+      "foot": "left",
+      "marketValueEur": 22000000,
+      "worldCup2026": { "appearances": 8, "goals": 8, "assists": 4, "minutes": 705, "xg": 5.9, "xa": 3.2, "passAccuracy": 88, "dribblesPer90": 3.1, "rating": 8.7 },
+      "traits": ["8 goals - second in the Golden Boot race", "dragged Argentina to the final at 39", "free-kick threat", "final-third orchestrator", "captain and talisman"]
+    },
+    {
+      "id": "haaland-nor",
+      "name": "Erling Haaland",
+      "country": "Norway",
+      "club": "Manchester City",
+      "position": "FW",
+      "age": 25,
+      "foot": "left",
+      "marketValueEur": 190000000,
+      "worldCup2026": { "appearances": 6, "goals": 7, "assists": 1, "minutes": 540, "xg": 6.6, "xa": 0.8, "passAccuracy": 74, "dribblesPer90": 1.2, "rating": 8.3 },
+      "traits": ["7 goals in Norway's quarter-final run", "box predator", "physical dominance", "first-time finishing", "near-post runs"]
     },
     {
       "id": "bellingham-eng",
@@ -23,11 +47,71 @@
       "country": "England",
       "club": "Real Madrid",
       "position": "MF",
-      "age": 22,
+      "age": 23,
       "foot": "right",
       "marketValueEur": 200000000,
-      "worldCup2026": { "appearances": 5, "goals": 3, "assists": 2, "minutes": 450, "xg": 2.1, "xa": 1.8, "passAccuracy": 88, "dribblesPer90": 2.3, "tacklesPer90": 2.1, "rating": 8.2 },
-      "traits": ["late box arrivals", "ball progression", "press resistance", "two-way engine", "leadership"]
+      "worldCup2026": { "appearances": 8, "goals": 7, "assists": 3, "minutes": 690, "xg": 4.8, "xa": 2.6, "passAccuracy": 89, "dribblesPer90": 2.4, "rating": 8.5 },
+      "traits": ["7 goals from midfield including the stoppage-time sealer in the 6-4 third-place win", "late box arrivals", "ball progression", "press resistance", "leadership"]
+    },
+    {
+      "id": "ferran-torres-esp",
+      "name": "Ferran Torres",
+      "country": "Spain",
+      "club": "Barcelona",
+      "position": "FW",
+      "age": 26,
+      "foot": "right",
+      "marketValueEur": 60000000,
+      "worldCup2026": { "appearances": 8, "goals": 5, "assists": 2, "minutes": 610, "xg": 4.0, "xa": 1.5, "passAccuracy": 85, "dribblesPer90": 2.0, "rating": 8.4 },
+      "traits": ["scored the extra-time winner in the final vs Argentina", "channel runs", "penalty-box movement", "two-footed finishing", "big-moment temperament"]
+    },
+    {
+      "id": "yamal-esp",
+      "name": "Lamine Yamal",
+      "country": "Spain",
+      "club": "Barcelona",
+      "position": "FW",
+      "age": 19,
+      "foot": "left",
+      "marketValueEur": 220000000,
+      "worldCup2026": { "appearances": 8, "goals": 4, "assists": 5, "minutes": 680, "xg": 3.2, "xa": 4.1, "passAccuracy": 87, "dribblesPer90": 5.3, "rating": 8.6 },
+      "traits": ["tournament star of champions Spain", "elite 1v1 winger", "inverted left foot", "chance creation volume", "fearless in finals"]
+    },
+    {
+      "id": "pedri-esp",
+      "name": "Pedri",
+      "country": "Spain",
+      "club": "Barcelona",
+      "position": "MF",
+      "age": 23,
+      "foot": "right",
+      "marketValueEur": 120000000,
+      "worldCup2026": { "appearances": 8, "goals": 1, "assists": 3, "minutes": 700, "xg": 0.9, "xa": 2.8, "passAccuracy": 93, "dribblesPer90": 2.7, "rating": 8.2 },
+      "traits": ["midfield metronome of the champions", "press resistance", "line-breaking passes", "tempo control", "positional intelligence"]
+    },
+    {
+      "id": "saka-eng",
+      "name": "Bukayo Saka",
+      "country": "England",
+      "club": "Arsenal",
+      "position": "FW",
+      "age": 24,
+      "foot": "left",
+      "marketValueEur": 150000000,
+      "worldCup2026": { "appearances": 8, "goals": 6, "assists": 2, "minutes": 650, "xg": 4.4, "xa": 1.9, "passAccuracy": 84, "dribblesPer90": 3.6, "rating": 8.3 },
+      "traits": ["hat trick in the 6-4 third-place win over France", "right-wing isolation threat", "cutback specialist", "set-piece delivery", "consistency"]
+    },
+    {
+      "id": "alvarez-arg",
+      "name": "Julian Alvarez",
+      "country": "Argentina",
+      "club": "Atletico Madrid",
+      "position": "FW",
+      "age": 26,
+      "foot": "right",
+      "marketValueEur": 110000000,
+      "worldCup2026": { "appearances": 8, "goals": 4, "assists": 2, "minutes": 640, "xg": 3.7, "xa": 1.4, "passAccuracy": 82, "dribblesPer90": 2.2, "rating": 7.9 },
+      "traits": ["relentless pressing forward", "runs the channels for Messi", "clinical in transition", "workrate", "big-game experience"]
     },
     {
       "id": "vinicius-bra",
@@ -35,155 +119,11 @@
       "country": "Brazil",
       "club": "Real Madrid",
       "position": "FW",
-      "age": 25,
+      "age": 26,
       "foot": "right",
       "marketValueEur": 170000000,
-      "worldCup2026": { "appearances": 6, "goals": 5, "assists": 4, "minutes": 520, "xg": 4.0, "xa": 3.1, "passAccuracy": 81, "dribblesPer90": 5.6, "rating": 8.4 },
-      "traits": ["1v1 dominance from the left", "carries at speed", "cutback creator", "draws fouls"]
-    },
-    {
-      "id": "lautaro-arg",
-      "name": "Lautaro Martinez",
-      "country": "Argentina",
-      "club": "Inter Milan",
-      "position": "FW",
-      "age": 28,
-      "foot": "right",
-      "marketValueEur": 110000000,
-      "worldCup2026": { "appearances": 7, "goals": 6, "assists": 1, "minutes": 610, "xg": 5.2, "xa": 0.9, "passAccuracy": 78, "dribblesPer90": 1.6, "rating": 8.1 },
-      "traits": ["clinical near-post finishing", "channel runs", "hold-up play", "pressing forward"]
-    },
-    {
-      "id": "julian-arg",
-      "name": "Julian Alvarez",
-      "country": "Argentina",
-      "club": "Atletico Madrid",
-      "position": "FW",
-      "age": 26,
-      "foot": "right",
-      "marketValueEur": 100000000,
-      "worldCup2026": { "appearances": 7, "goals": 4, "assists": 3, "minutes": 590, "xg": 3.3, "xa": 2.4, "passAccuracy": 84, "dribblesPer90": 2.2, "rating": 7.9 },
-      "traits": ["tireless movement", "second-striker link play", "transition runs", "high work rate"]
-    },
-    {
-      "id": "yamal-esp",
-      "name": "Lamine Yamal",
-      "country": "Spain",
-      "club": "FC Barcelona",
-      "position": "FW",
-      "age": 18,
-      "foot": "left",
-      "marketValueEur": 200000000,
-      "worldCup2026": { "appearances": 5, "goals": 2, "assists": 4, "minutes": 430, "xg": 1.7, "xa": 3.6, "passAccuracy": 86, "dribblesPer90": 4.8, "rating": 8.0 },
-      "traits": ["right-wing wizardry", "inswinging deliveries", "final-third creativity", "fearless"]
-    },
-    {
-      "id": "pedri-esp",
-      "name": "Pedri",
-      "country": "Spain",
-      "club": "FC Barcelona",
-      "position": "MF",
-      "age": 23,
-      "foot": "right",
-      "marketValueEur": 130000000,
-      "worldCup2026": { "appearances": 5, "goals": 1, "assists": 2, "minutes": 460, "xg": 0.9, "xa": 1.7, "passAccuracy": 94, "dribblesPer90": 2.0, "tacklesPer90": 1.6, "rating": 7.8 },
-      "traits": ["tempo control", "press resistance", "line-breaking passes", "positional intelligence"]
-    },
-    {
-      "id": "musiala-ger",
-      "name": "Jamal Musiala",
-      "country": "Germany",
-      "club": "Bayern Munich",
-      "position": "MF",
-      "age": 23,
-      "foot": "right",
-      "marketValueEur": 150000000,
-      "worldCup2026": { "appearances": 4, "goals": 3, "assists": 1, "minutes": 360, "xg": 2.0, "xa": 1.2, "passAccuracy": 87, "dribblesPer90": 5.1, "rating": 7.9 },
-      "traits": ["close-control dribbling", "half-space carries", "chaos creator in tight areas"]
-    },
-    {
-      "id": "pulisic-usa",
-      "name": "Christian Pulisic",
-      "country": "United States",
-      "club": "AC Milan",
-      "position": "FW",
-      "age": 27,
-      "foot": "right",
-      "marketValueEur": 65000000,
-      "worldCup2026": { "appearances": 4, "goals": 3, "assists": 2, "minutes": 360, "xg": 1.9, "xa": 1.5, "passAccuracy": 82, "dribblesPer90": 3.2, "rating": 7.6 },
-      "traits": ["direct running", "left-foot curlers", "carries in transition", "talisman for the hosts"]
-    },
-    {
-      "id": "kane-eng",
-      "name": "Harry Kane",
-      "country": "England",
-      "club": "Bayern Munich",
-      "position": "FW",
-      "age": 32,
-      "foot": "right",
-      "marketValueEur": 80000000,
-      "worldCup2026": { "appearances": 5, "goals": 5, "assists": 2, "minutes": 450, "xg": 4.4, "xa": 1.6, "passAccuracy": 83, "dribblesPer90": 0.9, "rating": 7.8 },
-      "traits": ["complete striker", "deep-lying link play", "penalties", "long-range passing"]
-    },
-    {
-      "id": "dembele-fra",
-      "name": "Ousmane Dembele",
-      "country": "France",
-      "club": "Paris Saint-Germain",
-      "position": "FW",
-      "age": 28,
-      "foot": "both",
-      "marketValueEur": 90000000,
-      "worldCup2026": { "appearances": 7, "goals": 4, "assists": 5, "minutes": 600, "xg": 3.0, "xa": 4.2, "passAccuracy": 83, "dribblesPer90": 4.4, "rating": 8.0 },
-      "traits": ["two-footed unpredictability", "right-wing width", "cutbacks", "high top speed"]
-    },
-    {
-      "id": "gakpo-ned",
-      "name": "Cody Gakpo",
-      "country": "Netherlands",
-      "club": "Liverpool",
-      "position": "FW",
-      "age": 26,
-      "foot": "right",
-      "marketValueEur": 70000000,
-      "worldCup2026": { "appearances": 4, "goals": 4, "assists": 1, "minutes": 350, "xg": 2.8, "xa": 0.9, "passAccuracy": 80, "dribblesPer90": 2.6, "rating": 7.7 },
-      "traits": ["arriving at the near post", "left-side inside forward", "powerful drives", "aerial threat"]
-    },
-    {
-      "id": "rodrygo-bra",
-      "name": "Rodrygo",
-      "country": "Brazil",
-      "club": "Real Madrid",
-      "position": "FW",
-      "age": 25,
-      "foot": "right",
-      "marketValueEur": 100000000,
-      "worldCup2026": { "appearances": 6, "goals": 3, "assists": 3, "minutes": 500, "xg": 2.4, "xa": 2.6, "passAccuracy": 85, "dribblesPer90": 3.0, "rating": 7.7 },
-      "traits": ["combination play", "big-moment finishing", "flexible front-three role", "composure"]
-    },
-    {
-      "id": "endrick-bra",
-      "name": "Endrick",
-      "country": "Brazil",
-      "club": "Real Madrid",
-      "position": "FW",
-      "age": 19,
-      "foot": "right",
-      "marketValueEur": 60000000,
-      "worldCup2026": { "appearances": 5, "goals": 3, "assists": 0, "minutes": 210, "xg": 2.2, "xa": 0.4, "passAccuracy": 76, "dribblesPer90": 2.1, "rating": 7.4 },
-      "traits": ["impact substitute", "penalty-box instincts", "quick feet in the box", "raw upside"]
-    },
-    {
-      "id": "bruno-por",
-      "name": "Bruno Fernandes",
-      "country": "Portugal",
-      "club": "Manchester United",
-      "position": "MF",
-      "age": 31,
-      "foot": "right",
-      "marketValueEur": 55000000,
-      "worldCup2026": { "appearances": 4, "goals": 2, "assists": 3, "minutes": 360, "xg": 1.5, "xa": 2.9, "passAccuracy": 84, "dribblesPer90": 1.3, "tacklesPer90": 1.8, "rating": 7.6 },
-      "traits": ["set-piece delivery", "through-ball vision", "shooting from distance", "relentless intensity"]
+      "worldCup2026": { "appearances": 5, "goals": 3, "assists": 2, "minutes": 430, "xg": 2.8, "xa": 1.7, "passAccuracy": 81, "dribblesPer90": 4.8, "rating": 7.6 },
+      "traits": ["left-wing 1v1 dominance", "transition killer", "chance creation off the dribble", "flair", "exited before the semi-finals"]
     }
   ]
 }

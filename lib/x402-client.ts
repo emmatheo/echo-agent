@@ -5,13 +5,12 @@
  * Client-side wallet + x402 payment plumbing for the browser.
  *  - Connects an injected Injective-EVM wallet (MetaMask / Rabby) via viem.
  *  - Adds/switches to Injective EVM (chain 1776) if needed.
- *  - Uses the official x402 helper `wrapFetchWithPayment` so the
- *    402 -> sign (EIP-3009) -> retry-with-X-PAYMENT flow is handled by the lib.
- * Payment is signed CLIENT-SIDE by the user's wallet. No keys touch our server.
+ *  - Premium requests pay via @injectivelabs/x402's own client (the same
+ *    package that quotes the 402 server-side), signed by a demo agent wallet.
  */
 
+import { createInjectiveClient } from "@injectivelabs/x402/client";
 import { createWalletClient, custom, type WalletClient } from "viem";
-import { wrapFetchWithPayment } from "x402-fetch";
 
 // NEXT_PUBLIC_* vars are inlined at build time, so the deploy environment
 // (e.g. Render) controls which chain the wallet flow targets. Defaults are
@@ -188,16 +187,39 @@ export function watchWallet(
 }
 
 /**
- * Payment-aware fetch bound to the connected wallet. `maxValue` caps the quote
- * (0.05 USDC ceiling for a 0.02 USDC service) to protect the user.
+ * Payment-aware fetch using @injectivelabs/x402's own client — the same
+ * package that quotes the 402 on the server, so requester and quoter always
+ * speak the same protocol dialect.
+ *
+ * x402 is agent-native: payments are signed by a payer key, not an injected
+ * wallet popup. The demo "agent wallet" key comes from
+ * NEXT_PUBLIC_PAYER_PRIVATE_KEY (build-time inlined). Fund it with a little
+ * testnet USDC; it needs no gas (the facilitator settles on-chain).
+ * TESTNET ONLY: anything in NEXT_PUBLIC_* ships in the JS bundle, so never
+ * put a mainnet key here.
  */
-export function makePaidFetch(walletClient: WalletClient) {
-  const MAX_USDC_ATOMIC = BigInt(50_000);
-  return wrapFetchWithPayment(
-    fetch,
-    walletClient as never,
-    MAX_USDC_ATOMIC as never,
-  );
+const PAYER_PRIVATE_KEY = process.env.NEXT_PUBLIC_PAYER_PRIVATE_KEY;
+
+export function makePaidFetch(_walletClient: WalletClient) {
+  if (!PAYER_PRIVATE_KEY) {
+    throw new Error(
+      "Premium demo payments need NEXT_PUBLIC_PAYER_PRIVATE_KEY (a testnet agent wallet holding USDC) set at build time.",
+    );
+  }
+  const client = createInjectiveClient({
+    privateKey: PAYER_PRIVATE_KEY as `0x${string}`,
+  });
+  return (input: RequestInfo | URL, init?: RequestInit) => {
+    // The x402 client wants an absolute URL; resolve app-relative paths.
+    const raw =
+      typeof input === "string"
+        ? input
+        : input instanceof URL
+          ? input.href
+          : input.url;
+    const url = new URL(raw, globalThis.location?.origin).href;
+    return client.fetch(url, init);
+  };
 }
 
 export function shortAddress(addr?: string) {
